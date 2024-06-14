@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>ユーザーログイン</title>
+</head>
+<body>
+
+    <header>
+        <dv>
+            <h1>求人情報</h1>
+            </div>
+
+            <nav>
+                    <p><a href="login.html">管理者画面へ</a></p>
+            </nav>
+    </header>
+
+    <main>
+        <h1 class="login">ユーザーログイン</h1>
+        <section>
+            <p class="login"><span>*は必須入力です</span></p>
+            <form action="admin_user.php" method="post" class="login">
+                <table>
+                    <tr>
+                        <td><span>*</span>ID</td>
+                        <td><input type="text" name="id" value="" required></td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>パスワード</td>
+                        <td><input type="password" name="pass" value="" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="submit" value="ログイン"></td>
+                        <td><input type="hidden" name="mode" value="register"></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+
+    </footer>
+</body>
+</html>

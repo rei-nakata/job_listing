@@ -1,0 +1,19 @@
+<section id="favorite" >
+    id： <b style="color:green">!id!</b><br>
+    店名： <b>!店名!</b><br>
+    キャッチコピー： <b>!キャッチコピー!</b><br>
+    職種： <b>!職種!</b><br>
+    最寄り駅： <b>!最寄り駅!</b><br>
+    時給： <b>!時給!</b>円<br>
+    <form action="user.php" method="post">
+        <input type="submit" name="submit" value="お気に入り削除" class="favorite">
+        <input type="hidden" name="mode" value="favodele">
+        <input type = "hidden" name = "id" value = "!id!">
+    </form>
+    <form action="user.php" method="post">
+    <input type="submit" name="submit" value="申し込み" class="apply">
+    <input type="hidden" name="mode" value="apply">
+    <input type = "hidden" name = "id" value = "!id!">
+    <input type = "hidden" name = "shop" value = "!店名!">
+    </form>
+</section>

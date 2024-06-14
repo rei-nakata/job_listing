@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>管理者画面</title>
+</head>
+<body>
+    <h1>管理者画面</h1>
+
+    <section class="register">
+        <h2>新規登録</h2>
+        <span>*は必須入力です</span>
+            <form action="manager.php" method="post">
+                <table id="table">
+                    <tr>
+                        <td><span>*</span>店名</td>
+                        <td><input type="text" name="店名" value="" required></td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>キャッチコピー</td>
+                        <td><input type="text" name="キャッチコピー" value="" required></td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>職種</td>
+                        <!-- <td><input type="text" name="職種" value="" required></td> -->
+                         <td>
+                            <select name="職種" id="" required>
+                                <option value=""></option>
+                                <option value="飲食店">飲食店
+                                <option value="販売">販売
+                                <option value="アパレル">アパレル
+                                <option value="レジャー">レジャー
+                                <option value="塾講師">塾講師
+                            </select>
+                         </td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>最寄り駅</td>
+                        <td><input type="text" name="最寄り駅" value="" required></td>
+                    </tr>
+                    <tr>
+                        <td><span>*</span>時給</td>
+                        <td><input type="text" name="時給" value="" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" name="submit" value="登録"></td>
+                        <td><input type="hidden" name="mode" value="register"></td>
+                    </tr>
+                </table>
+            </form>
+        </section>
+    <section class="edit">
+        <h2>編集</h2>
+        <p class="holder">編集するときはこちらに表示されます</p>
+    </section>
+   
+    <h2>現在の求人情報一覧</h2>
+    <section class="center">
+        <table class="insert">
+            <tr>
+                <th>登録id</th>
+                <th>店名</th>
+                <th>キャッチコピー</th>
+                <th>職種</th>
+                <th>最寄り駅</th>
+                <th>時給(円)</th>
+                <th>編集</th>
+                <th>削除</th>
+            </tr>
+            !block!
+        </table>
+    </section>
+
+    <footer>
+        <p><a href="">ページtopへ</a></p>
+    </footer>
+</body>
+</html>

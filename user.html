@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <script src="script.js"></script>
+    <title>求人情報</title>
+</head>
+
+<body>
+    <header class="header">
+        <div>
+            <h1><a href="user.php" class="atag">求人情報</a></h1>
+        </div>
+        <!-- <nav>
+            <p><a href="login_user.html">ログアウト</a></p>
+            <p><a href="login.html">管理者はこちら</a></p>
+        </nav> -->
+        <div class="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="#favo">お気に入り</a></li>
+                <li><a href="#sear">検索</a></li>
+                <li><a href="#dis">求人一覧</a></li>
+                <li><a href="#sta">申し込み履歴</a></li>
+            </ul>
+        </nav>
+
+        <button class="header__hamburger hamburger" id="js-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        </div>
+    </header>
+
+    <main>
+        <h2 id="favo">お気に入り</h2>
+        <section class="display">
+            現在お気に入りはありません。
+        </section>
+
+        <section>
+            <h2 id="sear">検索</h2>
+            <h3>並び替え検索</h3>
+            <section id="narabikae">
+                <form action="user.php" method="post">
+                    <select name="narabikae">
+                        <option name="narabikae" value="---">---</option>
+                        <option name="narabikae" value="新着順">新着順</option>
+                        <option name="narabikae" value="時給順">時給順</option>
+                    </select>
+                    <input type="submit" name="submit" value="検索">
+                    <input type="hidden" name="mode" value="narabikae">
+                </form>
+            </section>
+
+            <h3>エリア絞り込み検索</h3>
+            <section id="area">
+                <form action="user.php" method="post">
+                    <label><input type="radio" name="area" value="23区内">23区内</label>
+                    <label><input type="radio" name="area" value="23区外">23区外</label>
+                    <label><input type="radio" name="area" value="全て">全て</label>
+                    <label><input type="submit" name="submit" value="検索"></label>
+                    <label><input type="hidden" name="mode" value="area"></label>
+                </form>
+            </section>
+
+            <h3>職種絞り込み検索</h3>
+            <section id="shokushu">
+                <form action="user.php" method="post">
+                    <label><input type="radio" name="search" value="飲食店">飲食店</label>
+                    <label><input type="radio" name="search" value="販売">販売</label>
+                    <label><input type="radio" name="search" value="アパレル">アパレル</label>
+                    <label><input type="radio" name="search" value="レジャー">レジャー</label>
+                    <label><input type="radio" name="search" value="塾講師">塾講師</label>
+                    <label><input type="radio" name="search" value="全て">全て</label>
+                    <label><input type="submit" name="submit" value="検索"></label>
+                    <label><input type="hidden" name="mode" value="search"></label>
+                </form>
+            </section>
+        </section>
+
+        <h2 id="dis">現在の求人情報一覧</h2>
+        <section class="display">
+            !block!
+        </section>
+
+        <h2 id="sta">申し込み履歴</h2>
+        <section class="display">
+            現在申し込み履歴はありません。
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="">ページtopへ</a></p>
+    </footer>
+
+</body>
+
+</html>

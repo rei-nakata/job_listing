@@ -1,0 +1,43 @@
+ <section id="edit">
+    <span>*は必須入力です</span>
+    <form action="manager.php" method="post">
+        <table id="table">
+            <tr>
+                <td><span>*</span>店名</td>
+                <td><input type="text" name="店名" value="!店名!" required></td>
+            </tr>
+            <tr>
+                <td><span>*</span>キャッチコピー</td>
+                <td><input type="text" name="キャッチコピー" value="!キャッチコピー!" required></td>
+            </tr>
+            <tr>
+                <td><span>*</span>職種</td>
+                <td>
+                    <select name="職種" id="" required>
+                        <option value="!職種!">!職種!</option>
+                        <option value="飲食店">飲食店
+                        <option value="販売">販売
+                        <option value="アパレル">アパレル
+                        <option value="レジャー">レジャー
+                        <option value="塾講師">塾講師
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><span>*</span>最寄り駅</td>
+                <td><input type="text" name="最寄り駅" value="!最寄り駅!" required></td>
+            </tr>
+            <tr>
+                <td><span>*</span>時給</td>
+                <td><input type="text" name="時給" value="!時給!" required></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="submit" value="更新" class="change"></td>
+                <td>
+                    <input type="hidden" name="mode" value="change">
+                    <input type = "hidden" name = "id" value = "!id!">
+                </td>
+            </tr>
+        </table>
+    </form>
+</section>

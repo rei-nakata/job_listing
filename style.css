@@ -1,0 +1,125 @@
+:root{
+    background-color: lightblue;
+}
+body {
+    padding:5%;
+    margin: 2%;
+    background-color: white;
+}
+footer{
+    clear: both;
+}
+h1, h2{
+    background-color: lightblue;
+    clear: both;
+}
+span, #table span{
+    color: red;
+}
+nav{
+    float: right;
+}
+.atag, a {
+    color: inherit; 
+    text-decoration: none;
+    font-weight: bold;
+}
+.display{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#user, #favorite{
+    border-color: lightblue;
+    border-style: solid;
+    border-width: 5px;
+    width: 30%;
+    margin: 5px;
+    border-radius: 20px;
+    padding: 5px;
+}
+.edit{
+    float: right;
+    width: 55%;
+}
+.register{
+    float: left;
+    width: 45%;
+}
+#siborikomi, #shokushu, #area{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.holder, .insert{
+    text-align: center;
+    align-items: center;
+}
+.login {
+    max-width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin: 0 auto;
+}
+.update{
+    background-color: lightgreen;
+}
+.delete, .apply{
+    background-color: lightsalmon;
+}
+.favorite{
+    background-color: rgb(235, 235, 115);
+}
+.update:hover, .delete:hover, .favorite:hover, .apply:hover{
+    background-color: lightgray;
+}
+.insert {
+    border-collapse: collapse; /* セルの境界線を重ねる */
+    border: 1px solid lightblue; /* 表の線の色と太さを指定 */
+    width: 100%;
+}
+
+.insert td, .insert th{
+    border: 2px solid lightblue; /* セルの線の色と太さを指定 */
+    padding: 8px; /* セルの内側の余白を指定 */
+    vertical-align: middle;
+}
+.insert td form{
+    vertical-align: middle;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin: 0 auto;
+    width: 100%;
+}
+.insert tr:nth-child(even) {
+    background-color: #f2f2f2; /* 偶数行の背景色を変更 */
+}
+.logout{
+    text-decoration: none;
+    color: inherit; 
+    float: right;
+}
+.logout:hover, label:hover{
+    text-decoration: underline;
+}
+div{
+    display: inline-block;
+}
+.menu-toggle {
+    display: none;
+}
+
+.menu {
+    display: block;
+}
+
+ul,
+li {
+  list-style: none;
+}
