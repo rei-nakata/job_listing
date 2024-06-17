@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="style.css">
 <?php
 // データを受け取る
 $origin = [];
@@ -36,9 +37,10 @@ if ($input["id"] != "" && $input["pass"] != "") {
         $_SESSION["id"] = $input["id"]; //セッション情報を保存する
         header('Location:user.php');
     } else {
-        echo "IDまたはパスワードが間違っています。";
+        echo "<p class='center'>IDまたはパスワードが間違っています。</p>";
+        // header('Location:login_user.html');
         echo <<<form
-    <form>
+    <form class='center'>
     <input type="button" value="ログイン画面に戻る" onclick="history.back()">
     </form>
     form;

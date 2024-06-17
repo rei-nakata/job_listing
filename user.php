@@ -10,16 +10,32 @@ $pass = "testpass";
 
 echo '<link rel="stylesheet" type="text/css" href="style.css">';
 
-$name= "テストユーザー";
-$email = "test@gmail.co.jp";
 ////////////////////////////////////////////////////////////////
 // 本処理
 ////////////////////////////////////////////////////////////////
 
-// データをuser.htmlから受け取る
-$input = [];
+// データを受け取る
+$origin = [];
 if (isset($_POST)) {
-    $input += $_POST;
+    $origin += $_POST;
+}
+
+// 受け取ったデータを処理する
+foreach ($origin as $key => $value) {
+    // 文字コード処理
+    $mb_code = mb_detect_encoding($value);
+    $value = mb_convert_encoding($value, "UTF-8", $mb_code);
+
+    // XSS対策
+    $value = htmlentities($value, ENT_QUOTES);
+
+    // 改行処理
+    $value = str_replace("\r\n", "<br>", $value);
+    $value = str_replace("\n", "<br>", $value);
+    $value = str_replace("\r", "<br>", $value);
+
+    // 処理が終わったデータを$inputに入れなおす
+    $input[$key] = $value;
 }
 
 // DBに接続する
@@ -36,20 +52,23 @@ try {
             search();
         } else if ($input["mode"] == "narabikae") {
             narabikae();
-        } else if ($input["mode"] == "area"){ 
+        } else if ($input["mode"] == "area") {
             area();
-        }else if ($input["mode"] == "favorite") {
+        } else if ($input["mode"] == "favorite") {
             favorite_register();
         } else if ($input["mode"] == "favodele") {
             favorite_delete();
-        }else if ($input["mode"] == "apply") {
+        } else if ($input["mode"] == "apply") {
+            apply_conf();
+        } else if ($input["mode"] == "apply_submit") {
             apply_register();
+        } else if ($input["mode"] == "quit") {
+            header("Location:user.php");
         }
     }
     favorite_display();
     apply_display();
     display();
-
 } catch (PDOException $e) {
     echo "接続失敗..." . $e->getMessage();
 }
@@ -124,7 +143,7 @@ function favorite_display()
         $block .= $insert;
     }
 
-    if ($block == ""){
+    if ($block == "") {
         $block = "現在お気に入りはありません。";
     }
     $top = str_replace("現在お気に入りはありません。", $block, $top);
@@ -154,8 +173,8 @@ function favorite_delete()
     }
 }
 
-// 申し込み登録
-function apply_register()
+// 申し込み確認
+function apply_conf()
 {
     // 関数内でも変数で使えるようにする
     global $dbh;
@@ -164,9 +183,11 @@ function apply_register()
     global $email;
     $block = "";
 
+
+
     // sql文を書く
     $sql = <<<sql
-    update job set flag = 3 where id = ?;
+    select * from job where id = ?;
     sql;
 
     // 実行する
@@ -177,24 +198,44 @@ function apply_register()
     // テンプレートファイルの読み込み
     $fh = fopen('tmpl/conf.tmpl', "r");
     $fs = filesize('tmpl/conf.tmpl');
-    $insert_tmpl = fread($fh, $fs);
+    $insert = fread($fh, $fs);
     fclose($fh);
 
     // 繰り返してすべての行を取ってくる
-    $row = $stmt->fetch()
-    // 差し込み用テンプレートを初期化する
-    $insert = $insert_tmpl;
+    $row = $stmt->fetch();
 
     // 値を変数に入れなおす
+    $id = $row["id"];
     $shop = $row["店名"];
 
     // テンプレートファイルの文字置き換え
+
+    $insert = str_replace("!id!", $id, $insert);
     $insert = str_replace("!店名!", $shop, $insert);
+    $insert = str_replace("!name!", $name, $insert);
+    $insert = str_replace("!email!", $email, $insert);
 
     // index.htmlに差し込む変数に格納する
     $block .= $insert;
     echo $block;
+}
 
+// 申し込み登録
+function apply_register()
+{
+    // 関数内でも変数で使えるようにする
+    global $dbh;
+    global $input;
+
+    // sql文を書く
+    $sql = <<<sql
+    update job set flag = 3 where id = ?;
+    sql;
+
+    // 実行する
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(1, $input["id"]);
+    $stmt->execute();
 }
 
 // 申し込み表示
@@ -245,7 +286,7 @@ function apply_display()
         $block .= $insert;
     }
 
-    if ($block == ""){
+    if ($block == "") {
         $block = "現在申し込み履歴はありません。";
     }
     $top = str_replace("現在申し込み履歴はありません。", $block, $top);
@@ -324,23 +365,23 @@ function search()
     global $top;
     $block = "";
 
-    if(isset($input["search"])){
+    if (isset($input["search"])) {
         if ($input["search"] == "全て") {
             // sql文を書く
             $sql = <<<sql
                 select * from job where flag in (0,1);
                 sql;
-    
+
             // 実行する
             $stmt = $dbh->prepare($sql);
             $stmt->execute();
         } else {
-    
+
             // sql文を書く
             $sql = <<<sql
                 select * from job where 職種 = ? and flag in (0,1);
                 sql;
-    
+
             // 実行する
             $stmt = $dbh->prepare($sql);
             $stmt->bindParam(1, $input["search"]);
@@ -351,12 +392,12 @@ function search()
         $fs = filesize('tmpl/user.tmpl');
         $insert_tmpl = fread($fh, $fs);
         fclose($fh);
-    
+
         // 繰り返してすべての行を取ってくる
         while ($row = $stmt->fetch()) {
             // 差し込み用テンプレートを初期化する
             $insert = $insert_tmpl;
-    
+
             // 値を変数に入れなおす
             $id = $row["id"];
             $shop = $row["店名"];
@@ -364,7 +405,7 @@ function search()
             $job = $row["職種"];
             $station = $row["最寄り駅"];
             $money = $row["時給"];
-    
+
             // テンプレートファイルの文字置き換え
             $insert = str_replace("!id!", $id, $insert);
             $insert = str_replace("!店名!", $shop, $insert);
@@ -372,15 +413,14 @@ function search()
             $insert = str_replace("!職種!", $job, $insert);
             $insert = str_replace("!最寄り駅!", $station, $insert);
             $insert = str_replace("!時給!", $money, $insert);
-    
+
             // index.htmlに差し込む変数に格納する
             $block .= $insert;
         }
-    
+
         // index.htmlの置き換え
         $top = str_replace("!block!", $block, $top);
     }
-
 }
 
 // エリア検索
@@ -392,34 +432,33 @@ function area()
     global $top;
     $block = "";
 
-    if(isset($input["area"])){
+    if (isset($input["area"])) {
         if ($input["area"] == "全て") {
             // sql文を書く
             $sql = <<<sql
                 select * from job where flag in (0,1);
                 sql;
-    
+
             // 実行する
             $stmt = $dbh->prepare($sql);
             $stmt->execute();
-        } else if ($input["area"] == "23区外"){
-    
+        } else if ($input["area"] == "23区外") {
+
             // sql文を書く
             $sql = <<<sql
                 select * from job where 最寄り駅 in ('八王子みなみ野', '立川', '町田', 'よみうりランド', '多摩センター') and flag in (0,1);
                 sql;
-    
+
             // 実行する
             $stmt = $dbh->prepare($sql);
             $stmt->execute();
-        }
-        else{
-            
+        } else {
+
             // sql文を書く
             $sql = <<<sql
                 select * from job where 最寄り駅 not in ('八王子みなみ野', '立川', '町田', 'よみうりランド', '多摩センター') and flag in (0,1);
                 sql;
-    
+
             // 実行する
             $stmt = $dbh->prepare($sql);
             $stmt->execute();
@@ -429,12 +468,12 @@ function area()
         $fs = filesize('tmpl/user.tmpl');
         $insert_tmpl = fread($fh, $fs);
         fclose($fh);
-    
+
         // 繰り返してすべての行を取ってくる
         while ($row = $stmt->fetch()) {
             // 差し込み用テンプレートを初期化する
             $insert = $insert_tmpl;
-    
+
             // 値を変数に入れなおす
             $id = $row["id"];
             $shop = $row["店名"];
@@ -442,7 +481,7 @@ function area()
             $job = $row["職種"];
             $station = $row["最寄り駅"];
             $money = $row["時給"];
-    
+
             // テンプレートファイルの文字置き換え
             $insert = str_replace("!id!", $id, $insert);
             $insert = str_replace("!店名!", $shop, $insert);
@@ -450,15 +489,14 @@ function area()
             $insert = str_replace("!職種!", $job, $insert);
             $insert = str_replace("!最寄り駅!", $station, $insert);
             $insert = str_replace("!時給!", $money, $insert);
-    
+
             // index.htmlに差し込む変数に格納する
             $block .= $insert;
         }
-    
+
         // index.htmlの置き換え
         $top = str_replace("!block!", $block, $top);
     }
-
 }
 
 // 現在のタスク一覧表示処理
@@ -513,3 +551,4 @@ function display()
     $top = str_replace("!block!", $block, $top);
     echo $top;
 }
+

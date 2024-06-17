@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>新規登録</title>
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1>求人情報</h1>
+        </div>
+
+        <nav>
+            <p><a href="login_user.html">ログイン画面に戻る</a></p>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="login">新規アカウント登録</h1>
+        <p class="login"><span>*は必須入力です</span></p>
+        <form action="user_register.php" method="post" class="login">
+            <table>
+                <tr>
+                    <td><span>*</span>お名前</td>
+                    <td><input type="text" name="name" value="" required></td>
+                </tr>
+                <tr>
+                    <td><span>*</span>メールアドレス</td>
+                    <td><input type="text" name="email" value="" required></td>
+                </tr>
+                <tr>
+                    <td><span>*</span>ID</td>
+                    <td><input type="text" name="userid" value="" required></td>
+                </tr>
+                <tr>
+                    <td><span>*</span>パスワード</td>
+                    <td><input type="password" name="pass" value="" required></td>
+                </tr>
+                <tr>
+                    <td><span>*</span>パスワード再入力</td>
+                    <td><input type="password" value="" required></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" name="submit" value="登録" required></td>
+                    <td><input type="hidden" name="mode" value="user_register"></td>
+                </tr>
+            </table>
+        </form>
+    </main>
+</body>
+
+</html>

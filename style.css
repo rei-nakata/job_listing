@@ -1,35 +1,47 @@
-:root{
+:root {
     background-color: lightblue;
 }
+
 body {
-    padding:5%;
+    padding: 5%;
     margin: 2%;
     background-color: white;
 }
-footer{
+
+footer {
     clear: both;
 }
-h1, h2{
+
+h1,
+h2 {
     background-color: lightblue;
     clear: both;
 }
-span, #table span{
+
+span,
+#table span {
     color: red;
 }
-nav{
+
+nav {
     float: right;
 }
-.atag, a {
-    color: inherit; 
+
+.atag,
+a {
+    color: inherit;
     text-decoration: none;
     font-weight: bold;
 }
-.display{
+
+.display {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-#user, #favorite{
+
+#user,
+#favorite {
     border-color: lightblue;
     border-style: solid;
     border-width: 5px;
@@ -38,79 +50,109 @@ nav{
     border-radius: 20px;
     padding: 5px;
 }
-.edit{
+
+.edit {
     float: right;
     width: 55%;
 }
-.register{
+
+.register {
     float: left;
     width: 45%;
 }
-#siborikomi, #shokushu, #area{
+
+#siborikomi,
+#shokushu,
+#area {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     flex-direction: row;
 }
 
-.holder, .insert{
+.holder,
+.insert {
     text-align: center;
     align-items: center;
 }
+
 .login {
     max-width: 30%;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     margin: 0 auto;
 }
-.update{
+
+.update {
     background-color: lightgreen;
 }
-.delete, .apply{
+
+.delete,
+.apply {
     background-color: lightsalmon;
 }
-.favorite{
+
+.favorite {
     background-color: rgb(235, 235, 115);
 }
-.update:hover, .delete:hover, .favorite:hover, .apply:hover{
+
+.update:hover,
+.delete:hover,
+.favorite:hover,
+.apply:hover {
     background-color: lightgray;
 }
+
 .insert {
-    border-collapse: collapse; /* セルの境界線を重ねる */
-    border: 1px solid lightblue; /* 表の線の色と太さを指定 */
+    border-collapse: collapse;
+    /* セルの境界線を重ねる */
+    border: 1px solid lightblue;
+    /* 表の線の色と太さを指定 */
     width: 100%;
 }
 
-.insert td, .insert th{
-    border: 2px solid lightblue; /* セルの線の色と太さを指定 */
-    padding: 8px; /* セルの内側の余白を指定 */
+.insert td,
+.insert th {
+    border: 2px solid lightblue;
+    /* セルの線の色と太さを指定 */
+    padding: 8px;
+    /* セルの内側の余白を指定 */
     vertical-align: middle;
 }
-.insert td form{
+
+.insert td form {
     vertical-align: middle;
 }
+
 .center {
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
     margin: 0 auto;
     width: 100%;
 }
+
 .insert tr:nth-child(even) {
-    background-color: #f2f2f2; /* 偶数行の背景色を変更 */
+    background-color: #f2f2f2;
+    /* 偶数行の背景色を変更 */
 }
-.logout{
+
+.logout {
     text-decoration: none;
-    color: inherit; 
+    color: inherit;
     float: right;
 }
-.logout:hover, label:hover{
+
+.logout:hover,
+label:hover {
     text-decoration: underline;
 }
-div{
+
+div {
     display: inline-block;
 }
+
 .menu-toggle {
     display: none;
 }
@@ -119,7 +161,114 @@ div{
     display: block;
 }
 
+.menu {
+    background-color: lightblue;
+    width: 150px;
+    text-align: center;
+}
+
 ul,
 li {
-  list-style: none;
+    list-style: none;
+}
+
+.msg {
+    color: red;
+}
+
+.center {
+    text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  background: #fff;
+}
+
+.logo {
+  font-size: 24px;
+}
+/* チェックボックスを非表示にする */
+.drawer_hidden {
+    display: none;
+}
+
+/* ハンバーガーアイコンの設置スペース */
+.drawer_open {
+    display: flex;
+    height: 60px;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    /* 重なり順を一番上にする */
+    cursor: pointer;
+}
+
+/* ハンバーガーメニューのアイコン */
+.drawer_open span,
+.drawer_open span:before,
+.drawer_open span:after {
+    content: '';
+    display: block;
+    height: 3px;
+    width: 25px;
+    border-radius: 3px;
+    background: #333;
+    transition: 0.5s;
+    position: absolute;
+}
+
+/* 三本線の一番上の棒の位置調整 */
+.drawer_open span:before {
+    bottom: 8px;
+}
+
+/* 三本線の一番下の棒の位置調整 */
+.drawer_open span:after {
+    top: 8px;
+}
+
+/* アイコンがクリックされたら真ん中の線を透明にする */
+#drawer_input:checked~.drawer_open span {
+    background: rgba(255, 255, 255, 0);
+}
+
+/* アイコンがクリックされたらアイコンが×印になように上下の線を回転 */
+#drawer_input:checked~.drawer_open span::before {
+    bottom: 0;
+    transform: rotate(45deg);
+}
+
+#drawer_input:checked~.drawer_open span::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+/* メニューのデザイン*/
+.nav_content {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 100%;
+    /* メニューを画面の外に飛ばす */
+    z-index: 99;
+    background: #fff;
+    transition: .5s;
+}
+
+/* メニュー黒ポチを消す */
+.nav_list {
+    list-style: none;
+}
+
+/* アイコンがクリックされたらメニューを表示 */
+#drawer_input:checked~.nav_content {
+    left: 85%;
+    /* メニューを画面に入れる */
 }
