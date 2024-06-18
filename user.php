@@ -20,6 +20,9 @@ if (isset($_POST)) {
     $origin += $_POST;
 }
 
+$name = "testuser";
+$email = "test@gmail.com";
+
 // 受け取ったデータを処理する
 foreach ($origin as $key => $value) {
     // 文字コード処理
@@ -64,7 +67,7 @@ try {
             apply_register();
         } else if ($input["mode"] == "quit") {
             header("Location:user.php");
-        }
+        } 
     }
     favorite_display();
     apply_display();
@@ -143,11 +146,11 @@ function favorite_display()
         $block .= $insert;
     }
 
+    // 置き換え
     if ($block == "") {
         $block = "現在お気に入りはありません。";
     }
     $top = str_replace("現在お気に入りはありません。", $block, $top);
-    // index.htmlの置き換え
 }
 
 // お気に入り削除
@@ -182,8 +185,6 @@ function apply_conf()
     global $name;
     global $email;
     $block = "";
-
-
 
     // sql文を書く
     $sql = <<<sql
@@ -347,16 +348,16 @@ function narabikae()
             $insert = str_replace("!最寄り駅!", $station, $insert);
             $insert = str_replace("!時給!", $money, $insert);
 
-            // index.htmlに差し込む変数に格納する
+            // 差し込む変数に格納する
             $block .= $insert;
         }
 
-        // index.htmlの置き換え
+        // 置き換え
         $top = str_replace("!block!", $block, $top);
     }
 }
 
-// 検索
+// 職種検索
 function search()
 {
     // 関数内でも変数で使えるようにする
@@ -414,11 +415,11 @@ function search()
             $insert = str_replace("!最寄り駅!", $station, $insert);
             $insert = str_replace("!時給!", $money, $insert);
 
-            // index.htmlに差し込む変数に格納する
+            // 差し込む変数に格納する
             $block .= $insert;
         }
 
-        // index.htmlの置き換え
+        // 置き換え
         $top = str_replace("!block!", $block, $top);
     }
 }
@@ -446,7 +447,7 @@ function area()
 
             // sql文を書く
             $sql = <<<sql
-                select * from job where 最寄り駅 in ('八王子みなみ野', '立川', '町田', 'よみうりランド', '多摩センター') and flag in (0,1);
+                select * from job where 最寄り駅 in ('小田急永山', '京王永山', '京王堀之内', '南大沢', 'はるひ野', '稲城', '調布', '府中', '狛江', '若葉台' , '聖蹟桜ヶ丘', '豊田', '八王子', '日野', '国立', '谷保', '分倍河原', '武蔵小杉', '武蔵小金井', '三鷹', '吉祥寺', '多摩境', '京王片倉', 'めじろ台', '高尾', '狭間', '北野', '昭島' , '拝島', '青梅', '東大和', '国分寺', '小平', '飛田給', '稲城長沼', '南多摩', '西府', '高幡不動', '八王子みなみ野', '立川', '町田', 'よみうりランド', '多摩センター') and flag in (0,1);
                 sql;
 
             // 実行する
@@ -456,7 +457,7 @@ function area()
 
             // sql文を書く
             $sql = <<<sql
-                select * from job where 最寄り駅 not in ('八王子みなみ野', '立川', '町田', 'よみうりランド', '多摩センター') and flag in (0,1);
+                select * from job where 最寄り駅 not in ('小田急永山', '京王永山', '京王堀之内', '南大沢', 'はるひ野', '稲城', '調布', '府中', '狛江', '若葉台' , '聖蹟桜ヶ丘', '豊田', '八王子', '日野', '国立', '谷保', '分倍河原', '武蔵小杉', '武蔵小金井', '三鷹', '吉祥寺', '多摩境', '京王片倉', 'めじろ台', '高尾', '狭間', '北野', '昭島' , '拝島', '青梅', '東大和', '国分寺', '小平', '飛田給', '稲城長沼', '南多摩', '西府', '高幡不動', '八王子みなみ野', '立川', '町田', 'よみうりランド', '多摩センター') and flag in (0,1);
                 sql;
 
             // 実行する
@@ -490,11 +491,11 @@ function area()
             $insert = str_replace("!最寄り駅!", $station, $insert);
             $insert = str_replace("!時給!", $money, $insert);
 
-            // index.htmlに差し込む変数に格納する
+            // 差し込む変数に格納する
             $block .= $insert;
         }
 
-        // index.htmlの置き換え
+        // 置き換え
         $top = str_replace("!block!", $block, $top);
     }
 }
@@ -505,17 +506,32 @@ function display()
     // 関数内でも変数を使えるようにする
     global $dbh;
     global $top;
+    global $input;
     $block = "";
 
-    // sql文を書く
-    $sql = <<<sql
-    select * from job where flag in (0,1);
-    sql;
+    if (!isset($input["view"]))
+    {
+        // sql文を書く
+        $sql = <<<sql
+        select * from job where flag in (0,1) limit 15;
+        sql;
 
-    // 実行する
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute();
+        // 実行する
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute();
+    }
+    else{
+        $int = (int)$input["view"];
+        // sql文を書く
+        $sql = <<<sql
+        select * from job where flag in (0,1) limit ?;
+        sql;
 
+        // 実行する
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindValue(1, $int, PDO::PARAM_INT);
+        $stmt->execute();
+    }
     // テンプレートファイルの読み込み
     $fh = fopen('tmpl/user.tmpl', "r");
     $fs = filesize('tmpl/user.tmpl');
@@ -543,11 +559,11 @@ function display()
         $insert = str_replace("!最寄り駅!", $station, $insert);
         $insert = str_replace("!時給!", $money, $insert);
 
-        // index.htmlに差し込む変数に格納する
+        // 差し込む変数に格納する
         $block .= $insert;
     }
 
-    // index.htmlの置き換え
+    // 置き換え
     $top = str_replace("!block!", $block, $top);
     echo $top;
 }

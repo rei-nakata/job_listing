@@ -41,7 +41,7 @@ function user_register()
     global $input;
     global $top;
     $block = "";
-    
+
     // テンプレートファイルの読み込み
     $fh = fopen('tmpl/user_register.tmpl', "r");
     $fs = filesize('tmpl/user_register.tmpl');
@@ -69,5 +69,3 @@ function user_register()
     $top = str_replace("!block!", $block, $top);
     echo $top;
 }
-
-?>

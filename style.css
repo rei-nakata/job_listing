@@ -23,7 +23,7 @@ span,
     color: red;
 }
 
-nav {
+nav, #view {
     float: right;
 }
 
@@ -34,10 +34,11 @@ a {
     font-weight: bold;
 }
 
-.display {
+.display, #sear, #search{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    clear: both;
 }
 
 #user,
@@ -61,13 +62,8 @@ a {
     width: 45%;
 }
 
-#siborikomi,
-#shokushu,
-#area {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    flex-direction: row;
+#narabikae,#area{
+    width: 50%;
 }
 
 .holder,
@@ -153,20 +149,6 @@ div {
     display: inline-block;
 }
 
-.menu-toggle {
-    display: none;
-}
-
-.menu {
-    display: block;
-}
-
-.menu {
-    background-color: lightblue;
-    width: 150px;
-    text-align: center;
-}
-
 ul,
 li {
     list-style: none;
@@ -207,6 +189,8 @@ li {
     z-index: 100;
     /* 重なり順を一番上にする */
     cursor: pointer;
+    top: 15px;
+    right: 20px;
 }
 
 /* ハンバーガーメニューのアイコン */

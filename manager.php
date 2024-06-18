@@ -48,9 +48,8 @@ foreach ($origin as $key => $value) {
     $input[$key] = $value;
 }
 
-// DBに接続する、モード管理する
+// DBに接続する
 try {
-
     // ファイルの読み込み
     $fh2 = fopen('manager.html', "r");
     $fs2 = filesize('manager.html');
@@ -58,6 +57,8 @@ try {
     fclose($fh2);
 
     $dbh = new PDO($dsn, $user, $pass);
+
+    // モード管理
     if (isset($input["mode"])) {
         if ($input["mode"] === "register") {
             register();
@@ -102,7 +103,7 @@ function register()
         $stmt->execute();
     } else {
         // error対処
-        //error();
+        error();
     }
 }
 
@@ -224,6 +225,7 @@ function update()
 // 更新処理
 function change()
 {
+    // 関数内でも変数で使えるようにする
     global $dbh;
     global $input;
 
@@ -249,12 +251,11 @@ function display()
     // 関数内でも変数を使えるようにする
     global $dbh;
     global $block;
-    global $place;
     global $top;
 
     // sql文を書く
     $sql = <<<sql
-    select * from job where flag in (0,1);
+    select * from job where flag in (0,1,3);
     sql;
 
     // 実行する

@@ -10,7 +10,9 @@
 
 <body>
     <header class="header">
-        <div class="logo"><h1><a href="user.php" class="atag">求人情報</a></h1></div>
+        <div class="logo">
+            <h1><a href="user.php" class="atag">求人情報</a></h1>
+        </div>
 
         <!-- ハンバーガーメニュー部分 -->
         <div class="nav">
@@ -34,46 +36,9 @@
             </nav>
 
         </div>
-        <!-- <div>
-            <h1><a href="user.php" class="atag">求人情報</a></h1>
-        </div>
-        <nav>
-            <p><a href="login_user.html" class="logout">ログアウト</a></p>
-            <p><a href="login.html" login.html>管理者はこちら</a></p>
-        </nav>
-        <div class="menu-toggle">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <nav class="menu">
-            <ul>
-                <li><a href="#favo">お気に入り</a></li>
-                <li><a href="#sear">検索</a></li>
-                <li><a href="#dis">求人一覧</a></li>
-                <li><a href="#sta">申し込み履歴</a></li>
-            </ul>
-        </nav>
-
-        <button class="header__hamburger hamburger" id="js-hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        </div> -->
     </header>
 
-    <main class="display">
-        <!-- <section>
-            <div class="menu">
-                <ul>
-                    <li><a href="#favo">お気に入り</a></li>
-                    <li><a href="#sear">検索</a></li>
-                    <li><a href="#dis">求人一覧</a></li>
-                    <li><a href="#sta">申し込み履歴</a></li>
-                </ul>
-            </div>
-        </section> -->
+    <main>
         <section>
             <h2 id="favo">お気に入り</h2>
             <section class="display">
@@ -82,30 +47,31 @@
 
             <section>
                 <h2 id="sear">検索</h2>
-                <h3>並び替え検索</h3>
-                <section id="narabikae">
-                    <form action="user.php" method="post">
-                        <select name="narabikae">
-                            <option name="narabikae" value="---">---</option>
-                            <option name="narabikae" value="新着順">新着順</option>
-                            <option name="narabikae" value="時給順">時給順</option>
-                        </select>
-                        <input type="submit" name="submit" value="検索">
-                        <input type="hidden" name="mode" value="narabikae">
-                    </form>
-                </section>
+                <section id="search">
+                    <section id="area">
+                        <h3>エリア絞り込み検索</h3>
 
-                <h3>エリア絞り込み検索</h3>
-                <section id="area">
-                    <form action="user.php" method="post">
-                        <label><input type="radio" name="area" value="23区内">23区内</label>
-                        <label><input type="radio" name="area" value="23区外">23区外</label>
-                        <label><input type="radio" name="area" value="全て">全て</label>
-                        <label><input type="submit" name="submit" value="検索"></label>
-                        <label><input type="hidden" name="mode" value="area"></label>
-                    </form>
+                        <form action="user.php" method="post">
+                            <label><input type="radio" name="area" value="23区内">23区内</label>
+                            <label><input type="radio" name="area" value="23区外">23区外</label>
+                            <label><input type="radio" name="area" value="全て">全て</label>
+                            <label><input type="submit" name="submit" value="検索"></label>
+                            <label><input type="hidden" name="mode" value="area"></label>
+                        </form>
+                    </section>
+                    <section id="narabikae">
+                        <h3>並び替え検索</h3>
+                        <form action="user.php" method="post">
+                            <select name="narabikae">
+                                <option name="narabikae" value="---">---</option>
+                                <option name="narabikae" value="新着順">新着順</option>
+                                <option name="narabikae" value="時給順">時給順</option>
+                            </select>
+                            <input type="submit" name="submit" value="検索">
+                            <input type="hidden" name="mode" value="narabikae">
+                        </form>
+                    </section>
                 </section>
-
                 <h3>職種絞り込み検索</h3>
                 <section id="shokushu">
                     <form action="user.php" method="post">
@@ -114,6 +80,8 @@
                         <label><input type="radio" name="search" value="アパレル">アパレル</label>
                         <label><input type="radio" name="search" value="レジャー">レジャー</label>
                         <label><input type="radio" name="search" value="塾講師">塾講師</label>
+                        <label><input type="radio" name="search" value="イベント">イベント</label>
+                        <label><input type="radio" name="search" value="軽作業">軽作業</label>
                         <label><input type="radio" name="search" value="全て">全て</label>
                         <label><input type="submit" name="submit" value="検索"></label>
                         <label><input type="hidden" name="mode" value="search"></label>
@@ -122,6 +90,17 @@
             </section>
 
             <h2 id="dis">現在の求人情報一覧</h2>
+            <section id="view">
+                <form action="user.php" method="post">
+                    <select name="view">
+                        <option name="view" value="15">15件表示</option>
+                        <option name="view" value="30">30件表示</option>
+                        <option name="view" value="45">45件表示</option>
+                    </select>
+                    <input type="submit" name="submit" value="検索">
+                    <input type="hidden" name="mode" value="view">
+                </form>
+            </section>
             <section class="display">
                 !block!
             </section>

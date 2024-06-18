@@ -1,42 +1,42 @@
-    <section class="register">
-    <h2>新規情報登録</h2>
-    <span>*は必須入力です</span>
-        <form action="manager.php" method="post">
-            <table id="table">
-                <tr>
-                    <td><span>*</span>店名</td>
-                    <td><input type="text" name="店名" value="" required></td>
-                </tr>
-                <tr>
-                    <td><span>*</span>キャッチコピー</td>
-                    <td><input type="text" name="キャッチコピー" value="" required></td>
-                </tr>
-                <tr>
-                    <td><span>*</span>職種</td>
-                    <!-- <td><input type="text" name="職種" value="" required></td> -->
-                     <td>
-                        <select name="職種" id="" required>
-                            <option value=""></option>
-                            <option value="飲食店">飲食店
-                            <option value="販売">販売
-                            <option value="アパレル">アパレル
-                            <option value="レジャー">レジャー
-                            <option value="塾講師">塾講師
-                        </select>
-                     </td>
-                </tr>
-                <tr>
-                    <td><span>*</span>最寄り駅</td>
-                    <td><input type="text" name="最寄り駅" value="" required></td>
-                </tr>
-                <tr>
-                    <td><span>*</span>時給</td>
-                    <td><input type="text" name="時給" value="" required></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" name="submit" value="登録"></td>
-                    <td><input type="hidden" name="mode" value="register"></td>
-                </tr>
-            </table>
-        </form>
-    </section>
+<section class="register">
+<h2>新規情報登録</h2>
+<span>*は必須入力です</span>
+    <form action="manager.php" method="post">
+        <table id="table">
+            <tr>
+                <td><span>*</span>店名</td>
+                <td><input type="text" name="店名" value="" required></td>
+            </tr>
+            <tr>
+                <td><span>*</span>キャッチコピー</td>
+                <td><input type="text" name="キャッチコピー" value="" required></td>
+            </tr>
+            <tr>
+                <td><span>*</span>職種</td>
+                <!-- <td><input type="text" name="職種" value="" required></td> -->
+                    <td>
+                    <select name="職種" id="" required>
+                        <option value=""></option>
+                        <option value="飲食店">飲食店
+                        <option value="販売">販売
+                        <option value="アパレル">アパレル
+                        <option value="レジャー">レジャー
+                        <option value="塾講師">塾講師
+                    </select>
+                    </td>
+            </tr>
+            <tr>
+                <td><span>*</span>最寄り駅</td>
+                <td><input type="text" name="最寄り駅" value="" required></td>
+            </tr>
+            <tr>
+                <td><span>*</span>時給</td>
+                <td><input type="text" name="時給" value="" required></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="submit" value="登録"></td>
+                <td><input type="hidden" name="mode" value="register"></td>
+            </tr>
+        </table>
+    </form>
+</section>
