@@ -513,7 +513,7 @@ function display()
     {
         // sql文を書く
         $sql = <<<sql
-        select * from job where flag in (0,1) limit 15;
+        select * from job where flag in (0,1) limit 9;
         sql;
 
         // 実行する
